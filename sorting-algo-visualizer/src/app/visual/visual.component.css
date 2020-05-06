@@ -1,0 +1,59 @@
+body {
+  background-color: lightsalmon;
+  height: 100vh;
+}
+
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+  font-size: 15px;
+}
+
+.text {
+  font-size: 20px;
+}
+
+.menu {
+  background-color: lightsalmon;
+}
+
+.void {
+  flex: 0.35 0.35;
+}
+
+.void2 {
+  flex: 0.4 0.4;
+}
+
+.toolbar-wrap {
+  border-color: black;
+  border-style: solid;
+  border-width: 2px;
+  padding-top: 10px;
+}
+
+.array-container {
+  border-top: 2px;
+  border-color: black;
+  border-style: solid;
+  padding-top: 10px;
+  height: 100vh;
+}
+
+.arr {
+  width: 40px;
+  display: inline-block;
+  text-align: center;
+  border-color: black;
+  border-style: solid;
+  margin: auto;
+  
+}
