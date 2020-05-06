@@ -49,11 +49,12 @@ a {
 }
 
 .arr {
-  width: 40px;
+  width: auto;
   display: inline-block;
   text-align: center;
   border-color: black;
   border-style: solid;
   margin: auto;
-  
+  background-color: ivory;
+
 }
