@@ -1,0 +1,224 @@
+  /*********** ATTEMPT ! *******/
+
+  performMergeSort(arr, startIdx, endIdx) {
+    if (startIdx === endIdx) { return; }
+
+    const middleIdx = Math.floor((startIdx + endIdx) / 2);
+
+    this.performMergeSort(arr, startIdx, middleIdx);
+    this.performMergeSort(arr, middleIdx + 1, endIdx);
+
+    this.performMerge(arr, startIdx, middleIdx, endIdx);
+  }
+
+
+
+  performMerge(arr, sIdx, midIdx, endIdx) {
+    let i = sIdx;
+    let k = sIdx;
+    let j = midIdx + 1;
+
+    let left = arr.slice(0, midIdx);
+    let right = arr.slice(j, endIdx);
+
+
+    /*
+    arr.forEach(element => {
+      console.log(element);
+    });
+
+    console.log("end of full")
+
+    left.forEach(element => {
+      console.log(element);
+    });
+
+    console.log("end of left")
+
+
+    right.forEach(element => {
+      console.log(element);
+    });
+
+    console.log("end of right") */
+
+
+
+
+    timer(0, 200)
+    .pipe(takeWhile(() => i <= midIdx && j <= endIdx))
+    .subscribe(() => {
+       while (i <= midIdx && j <= endIdx) {
+        let change = false;
+        if (left[i] <= right[j]) {
+          change = true;
+          arr[k++] = left[i++];
+        } else {
+          change = true;
+          arr[k++] = right[j++];
+        }
+        if (change) { break; }
+      }
+
+       while (i <= midIdx) {
+        arr[k++] = left[i++];
+        break;
+      }
+
+       while (j <= endIdx) {
+        arr[k++] = right[j++];
+        break;
+      }
+    });
+  }
+
+//************* ATTEMPT 2 *****************/
+
+  performMergeSort(arr, l, r) {
+    if ( l < r ) {
+
+      // finding the middle index of arr
+      let mid = ( l + r) / 2;
+
+      // splitting the first & second half of original array
+      this.performMergeSort(arr, l, mid);
+      this.performMergeSort(arr, mid + 1, r);
+
+      // calling the merge function once arr is split
+      this.performMerge(arr, l, mid, r);
+    } else {
+      return;
+    }
+  }
+
+
+
+  performMerge(arr, l, m, r) {
+
+    let n1 = m - l + 1;
+    let n2 = r - m;
+
+    let leftArr = [];
+    let rightArr = [];
+
+    for (let i = 0; i < n1; ++i) {
+      leftArr[i] = arr[l + i];
+    }
+
+    for (let i = 0; i < n2; ++i) {
+      rightArr[i] = arr[m + 1 + i];
+    }
+
+
+    let i = 0;
+    let j = 0;
+    let k = 1;
+
+    timer(0, 100)
+    .pipe(takeWhile(() => i < n1 && j < n2))
+    .subscribe(() => {
+       if ( leftArr[i] <= rightArr[j]) {
+         arr[k] = leftArr[i];
+         i++;
+       } else {
+         arr[k] = rightArr[j];
+         j++;
+       }
+
+       k++;
+    });
+
+
+    timer(0, 100)
+    .pipe(takeWhile(() => i < n1))
+    .subscribe(() => {
+      arr[k++] = leftArr[i++];
+    });
+
+
+    timer(0, 100)
+    .pipe(takeWhile(() => j < n2))
+    .subscribe(() => {
+      arr[k++] = rightArr[j++];
+    });
+
+  }
+
+
+/********************* ATTEMPT 3 ****************//
+
+  performMergeSort(arr, startIdx, endIdx) {
+    if (startIdx === endIdx) { return; }
+
+    const middleIdx = Math.floor((startIdx + endIdx) / 2);
+
+    const leftArr = this.performMergeSort(arr, startIdx, middleIdx);
+    const rightArr = this.performMergeSort(arr, middleIdx + 1, endIdx);
+
+    this.performMerge(leftArr, rightArr);
+  }
+
+  performMerge(arrL, arrR) {
+
+    timer(0, 200)
+    .pipe(takeWhile(() => arrL.length && arrR.length))
+    .subscribe(() => {
+
+        if (arrL[0] < arrR[0]) {
+          this.visualArr.push(arrL.shift());
+        } else {
+          this.visualArr.push(arrR.shift());
+        }
+    });
+
+    return this.visualArr.concat(arrL.slice().concat(arrR.slice()));
+  }
+
+
+//****************** ATTEMPT 4 *****************//
+
+  performMergeSort(arr: number[]): number[] {
+    if (arr.length <= 1) {
+      return arr;
+    }
+
+    const middle = Math.floor(arr.length / 2);
+
+    const left = arr.slice(0, middle);
+    const right = arr.slice(middle);
+
+    return this.performMerge(this.performMergeSort(left), this.performMergeSort(right));
+
+  }
+
+  performMerge(left: number[], right: number[]): number[] {
+    const resArr: number[] = [];
+
+    let lIdx = 0;
+    let rIdx = 0;
+
+
+    timer(0, 100)
+    .pipe(takeWhile(() => lIdx + rIdx < left.length + right.length))
+    .subscribe(() => {
+
+      const lItem = left[lIdx];
+      const rItem = right[rIdx];
+
+      if (lItem == null) {
+        resArr.push(rItem);
+        rIdx++;
+      } else if (rItem == null) {
+        resArr.push(lItem);
+        lIdx++;
+      } else if (lItem < rItem) {
+        resArr.push(lItem);
+        lIdx++;
+      } else {
+        resArr.push(rItem);
+        rIdx++;
+      }
+    });
+
+    return resArr;
+  }
