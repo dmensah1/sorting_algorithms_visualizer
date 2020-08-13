@@ -3,14 +3,11 @@ a {
   color: black;
   font-size: 25px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .menu {
   background-color: gray;
-}
-
-.void {
-  flex: 0.5 0.5;
 }
 
 
