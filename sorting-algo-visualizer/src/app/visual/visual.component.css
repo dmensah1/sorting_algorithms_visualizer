@@ -7,7 +7,6 @@ body {
 ul {
   list-style: none;
   padding: 0;
-  margin-left: 75px;
   display: flex;
 }
 
